@@ -1,5 +1,5 @@
 # Project Overview
-The core source code is located in the `src` directory. After successful execution, a `result` directory will be generated in the root folder to store experiment outputs. Our code is developed based on [pymarl3](https://github.com/tjuHaoXiaotian/pymarl3) and [epymarl](https://github.com/uoe-agents/epymarl) code bases.
+The core source code is located in the `src` directory. After successful execution, a `result` directory will be generated in the root folder to store experiment outputs. Our code is developed based on [pymarl3](https://github.com/tjuHaoXiaotian/pymarl3) and [epymarl](https://github.com/uoe-agents/epymarl) code bases, and the installation of dependencies can refer to the tutorials provided by them.
 
 ## Training Scripts
 - `train_mpe_qmix.sh`, ​`train_smac_qmix.sh`, `train_mpe_vdn.sh`, `train_smac_vdn.sh`:  
