@@ -1,0 +1,80 @@
+# --- MAPPO specific parameters ---
+
+# env
+t_max: 20050000
+test_greedy: True
+test_nepisode: 64
+test_interval: 50000
+log_interval: 50000
+runner_log_interval: 10000
+learner_log_interval: 10000
+
+# mappo
+action_selector: "soft_policies"
+mask_before_softmax: True
+runner: "parallel"
+batch_size_run: 10
+buffer_size: 10
+batch_size: 10
+obs_agent_id: True 
+obs_last_action: False 
+obs_individual_obs: False
+standardise_rewards: True
+standardise_returns: False
+standardise_advantages: False
+# actor
+mac: "pd_mac"
+agent: "n_mlp"
+agent_output_type: "pi_logits"
+# update the target network every {} episodes
+target_update_interval_or_tau: 0.01
+learner: "pd_ppo_learner"
+# critic
+critic_type: "cv_critic"
+# network
+hidden_dim: 64
+pd_hidden_dim: 64
+lr: 0.0005
+pd_lr: 0.001
+optimizer: 'adam'
+entropy_coef: 0.01
+q_nstep: 5 # 1 corresponds to normal r + gammaV
+epochs: 4
+eps_clip: 0.2
+add_value_last_step: True
+
+# delay
+delay_type: "uf"
+delay_value: 6
+delay_scope: 3
+n_expand_action: 9
+delay_aware: False
+use_history: False
+one_hot_delay: False
+res_classification: True
+mask_prediction: True
+
+# predictor
+predictor_mode: "none"
+predictor_model: "tf"
+transformer_structure: ""
+# train
+cheating_start_value: 0.0
+cheating_end_value: 0.0
+cheating_start_time: 6000000
+cheating_end_time: 15000000
+teacher_forcing_start_value: 0.0
+teacher_forcing_end_value: 0.0
+teacher_forcing_start_time: 6000000
+teacher_forcing_end_time: 15000000 
+# teacher student
+teacher_model_dir: ""
+teacher_mac: "pd_mac"
+alpha_mac: 1.0
+alpha_mixer: 0.05
+teacher_student_start_value: 0.0
+teacher_student_end_value: 0.0
+teacher_student_start_time: 4000000
+teacher_student_end_time: 12000000 
+
+name: "pd_mappo"
