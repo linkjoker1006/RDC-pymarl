@@ -1,0 +1,52 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MPE+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-------------------------------------------------------------TAG-------------------------------------------------------------
+CUDA_VISIBLE_DEVICES="0" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-tag-v3" env_args.pretrained_wrapper="PretrainedTag" t_max=10050000 predictor_mode="none" delay_aware=True cheating_start_value=1.0 cheating_end_value=1.0 seed=18400701 exp_name="TAG-MAPPO-B" >> tag_mappo_b.log 2>&1 &
+CUDA_VISIBLE_DEVICES="1" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-tag-v3" t_max=10050000 predictor_mode="none" seed=18400701 exp_name="TAG-MAPPO-N" >> tag_mappo_n.log 2>&1 &
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-tag-v3" t_max=10050000 predictor_mode="none" delay_aware=True seed=18400701 exp_name="TAG-MAPPO-DA" >> tag_mappo_da.log 2>&1 &
+
+#####transformer#####
+CUDA_VISIBLE_DEVICES="0" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-tag-v3" t_max=10050000 predictor_mode="multi_step" transformer_structure="encoder-decoder" delay_aware=True seed=18400701 exp_name="TAG-MAPPO-TRANS-MS" >> tag_mappo_trans_ms.log 2>&1 &
+CUDA_VISIBLE_DEVICES="1" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-tag-v3" t_max=10050000 predictor_mode="single_step" transformer_structure="encoder-decoder" delay_aware=True seed=18400701 exp_name="TAG-MAPPO-TRANS-SS" >> tag_mappo_trans_ss.log 2>&1 &
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-tag-v3" t_max=10050000 predictor_mode="multi_step" transformer_structure="encoder-decoder" delay_aware=True use_history=True seed=18400701 exp_name="TAG-MAPPO-TRANS-MS-H" >> tag_mappo_trans_ms_h.log 2>&1 &
+CUDA_VISIBLE_DEVICES="3" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-tag-v3" t_max=10050000 predictor_mode="single_step" transformer_structure="encoder-decoder" delay_aware=True use_history=True seed=18400701 exp_name="TAG-MAPPO-TRANS-SS-H" >> tag_mappo_trans_ss_h.log 2>&1 &
+
+
+-------------------------------------------------------------SPREAD-------------------------------------------------------------
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="none" delay_aware=True cheating_start_value=1.0 cheating_end_value=1.0 exp_name="SPREAD-MAPPO-B" >> spread_mappo_b_2.log 2>&1 &
+CUDA_VISIBLE_DEVICES="1" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="none" seed=845998420 exp_name="SPREAD-MAPPO-N" >> spread_mappo_n.log 2>&1 &
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="none" delay_aware=True seed=602739546 exp_name="SPREAD-MAPPO-DA" >> spread_mappo_da_2.log 2>&1 &
+
+#####transformer#####
+CUDA_VISIBLE_DEVICES="0" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="multi_step" transformer_structure="encoder-decoder" delay_aware=True seed=845998420 exp_name="SPREAD-MAPPO-TRANS-MS" >> spread_mappo_trans_ms.log 2>&1 &
+CUDA_VISIBLE_DEVICES="1" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="single_step" transformer_structure="encoder-decoder" delay_aware=True seed=845998420 exp_name="SPREAD-MAPPO-TRANS-SS" >> spread_mappo_trans_ss.log 2>&1 &
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="multi_step" transformer_structure="encoder-decoder" delay_aware=True use_history=True seed=845998420 exp_name="SPREAD-MAPPO-TRANS-MS-H" >> spread_mappo_trans_ms_h.log 2>&1 &
+CUDA_VISIBLE_DEVICES="3" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="single_step" transformer_structure="encoder-decoder" delay_aware=True use_history=True seed=845998420 exp_name="SPREAD-MAPPO-TRANS-SS-H" >> spread_mappo_trans_ss_h.log 2>&1 &
+# teacher-student
+CUDA_VISIBLE_DEVICES="0" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="single_step" transformer_structure="encoder-decoder" delay_aware=True use_history=True delay_value=2 delay_scope=1 n_expand_action=3 t_max=10050000 seed=845998420 exp_name="SPREAD-MAPPO-TRANS-SS-H-TEACHER" >> spread_mappo_trans_ss_h_teacher.log 2>&1 &
+CUDA_VISIBLE_DEVICES="1" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="single_step" transformer_structure="encoder-decoder" delay_aware=True use_history=True teacher_student_start_value=0.5 teacher_student_end_value=0.1 teacher_model_dir="" seed=845998420 exp_name="SPREAD-MAPPO-TRANS-SS-H-STUDENT" >> spread_mappo_trans_ss_h_student.log 2>&1 &
+
+#####gru#####
+CUDA_VISIBLE_DEVICES="0" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="multi_step" delay_aware=True seed=845998420 exp_name="SPREAD-MAPPO-GRU-MS" >> spread_mappo_gru_ms.log 2>&1 &
+CUDA_VISIBLE_DEVICES="1" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="single_step" delay_aware=True seed=845998420 exp_name="SPREAD-MAPPO-GRU-SS" >> spread_mappo_gru_ss.log 2>&1 &
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="multi_step" delay_aware=True use_history=True seed=845998420 exp_name="SPREAD-MAPPO-GRU-MS-H" >> spread_mappo_gru_ms_h.log 2>&1 &
+CUDA_VISIBLE_DEVICES="3" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="single_step" delay_aware=True use_history=True seed=845998420 exp_name="SPREAD-MAPPO-GRU-SS-H" >> spread_mappo_gru_ss_h.log 2>&1 &
+# teacher-student
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="single_step" delay_aware=True use_history=True delay_value=2 delay_scope=1 n_expand_action=3 t_max=10050000 seed=845998420 exp_name="SPREAD-MAPPO-GRU-SS-H-TEACHER" >> spread_mappo_gru_ss_h_teacher.log 2>&1 &
+CUDA_VISIBLE_DEVICES="3" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-spread-v3" t_max=20050000 predictor_mode="single_step" delay_aware=True use_history=True teacher_student_start_value=0.5 teacher_student_end_value=0.1 teacher_model_dir="" seed=845998420 exp_name="SPREAD-MAPPO-GRU-SS-H-STUDENT" >> spread_mappo_gru_ss_h_student.log 2>&1 &
+
+
+
+-------------------------------------------------------------REFERENCE-------------------------------------------------------------
+CUDA_VISIBLE_DEVICES="0" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-reference-v3" t_max=10050000 predictor_mode="none" delay_aware=True cheating_start_value=1.0 cheating_end_value=1.0 seed=94406343 exp_name="REFERENCE-MAPPO-B" >> reference_mappo_b.log 2>&1 &
+CUDA_VISIBLE_DEVICES="1" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-reference-v3" t_max=10050000 predictor_mode="none" seed=94406343 exp_name="REFERENCE-MAPPO-N" >> reference_mappo_n.log 2>&1 &
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-reference-v3" t_max=10050000 predictor_mode="none" delay_aware=True seed=94406343 exp_name="REFERENCE-MAPPO-DA" >> reference_mappo_da.log 2>&1 &
+
+#####transformer#####
+CUDA_VISIBLE_DEVICES="0" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-reference-v3" t_max=10050000 predictor_mode="multi_step" transformer_structure="encoder-decoder" delay_aware=True seed=94406343 exp_name="REFERENCE-MAPPO-TRANS-MS" >> reference_mappo_trans_ms.log 2>&1 &
+CUDA_VISIBLE_DEVICES="1" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-reference-v3" t_max=10050000 predictor_mode="single_step" transformer_structure="encoder-decoder" delay_aware=True seed=94406343 exp_name="REFERENCE-MAPPO-TRANS-SS" >> reference_mappo_trans_ss.log 2>&1 &
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-reference-v3" t_max=10050000 predictor_mode="multi_step" transformer_structure="encoder-decoder" delay_aware=True use_history=True seed=94406343 exp_name="REFERENCE-MAPPO-TRANS-MS-H" >> reference_mappo_trans_ms_h.log 2>&1 &
+CUDA_VISIBLE_DEVICES="3" nohup python -u src/main.py --config=pd_mappo_tf4mpe --env-config=gymma with env_args.key="pz-mpe-simple-reference-v3" t_max=10050000 predictor_mode="single_step" transformer_structure="encoder-decoder" delay_aware=True use_history=True seed=94406343 exp_name="REFERENCE-MAPPO-TRANS-SS-H" >> reference_mappo_trans_ss_h.log 2>&1 &
+
+
+-------------------------------------------------------------ADVERSARY-------------------------------------------------------------
+CUDA_VISIBLE_DEVICES="2" nohup python -u src/main.py --config=pd_mappo_gru4mpe --env-config=gymma with env_args.key="pz-mpe-simple-adversary-v3" env_args.pretrained_wrapper="PretrainedAdversary" predictor_mode="none" delay_aware=True cheating_start_value=1.0 cheating_end_value=1.0 exp_name="ADVERSARY-MAPPO-B" >> adversary_mappo_b_2.log 2>&1 &
